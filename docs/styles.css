@@ -25,7 +25,7 @@ body {
 }
 
 .app {
-  width: min(100%, 560px);
+  width: min(100%, 640px);
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 24px;
@@ -41,6 +41,39 @@ body {
 .header p {
   margin: 0;
   color: var(--muted);
+}
+
+.card {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  background: #fcfdff;
+}
+
+.progress-card {
+  padding-top: 20px;
+}
+
+.progress-label,
+.assignment-label {
+  margin: 0 0 8px;
+  color: var(--muted);
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 25%;
+  background: var(--accent);
+  transition: width 0.25s ease;
 }
 
 .stats {
@@ -74,7 +107,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 24px;
-  background: #fcfdff;
+  background: #ffffff;
 }
 
 .status {
@@ -96,8 +129,9 @@ body {
   margin-bottom: 16px;
 }
 
-input {
-  flex: 1;
+input,
+select {
+  width: 100%;
   padding: 14px 16px;
   border-radius: 12px;
   border: 1px solid var(--border);
@@ -123,15 +157,27 @@ button:disabled {
   transform: none;
 }
 
-#submit-btn {
+.primary-btn {
+  width: 100%;
   background: var(--accent);
   color: white;
 }
 
-.start-button {
-  width: 100%;
-  background: var(--accent-dark);
-  color: white;
+.secondary-btn {
+  margin-top: 12px;
+  background: #eef2ff;
+  color: var(--accent-dark);
+}
+
+.survey-form {
+  display: grid;
+  gap: 16px;
+}
+
+.survey-form label {
+  display: grid;
+  gap: 8px;
+  font-weight: 600;
 }
 
 .sr-only {

@@ -3,49 +3,275 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Addition Sprint</title>
+    <title>Study Addition Game</title>
     <meta
       name="description"
-      content="A five-minute addition game for practicing arithmetic with score tracking."
+      content="A two-condition study experience for addition practice with basic and motivational versions."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="app">
       <header class="header">
-        <h1>Addition Sprint</h1>
-        <p>Solve as many addition problems as you can in five minutes.</p>
+        <h1>Study Addition Game</h1>
+        <p>Complete two short rounds and answer a brief survey after each one.</p>
       </header>
 
-      <section class="stats" aria-label="Game status">
-        <div class="stat-card">
-          <span class="label">Time</span>
-          <span id="timer" class="value">05:00</span>
-        </div>
-        <div class="stat-card">
-          <span class="label">Score</span>
-          <span id="score" class="value">0</span>
-        </div>
+      <section id="landing-section" class="card">
+        <h2>Welcome</h2>
+        <p>
+          You will be randomly assigned to one version first, then you will complete the other version after a short survey.
+        </p>
+        <button id="start-study-btn" class="primary-btn">Start study</button>
       </section>
 
-      <section class="game-card">
-        <p id="status" class="status">Press start to begin.</p>
-        <div id="question" class="question" aria-live="polite">?</div>
+      <section id="progress-section" class="card progress-card" hidden>
+        <p id="progress-label" class="progress-label">Step 1 of 4</p>
+        <div class="progress-bar" aria-hidden="true">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <p id="assignment-label" class="assignment-label">You will begin with the basic version.</p>
+      </section>
 
-        <form id="answer-form" class="answer-form">
-          <label class="sr-only" for="answer">Answer</label>
-          <input
-            id="answer"
-            type="number"
-            inputmode="numeric"
-            autocomplete="off"
-            placeholder="Type your answer"
-            disabled
-          />
-          <button type="submit" id="submit-btn" disabled>Submit</button>
+      <section id="condition-one-section" class="card" hidden>
+        <h2 id="condition-one-title">Round 1</h2>
+        <p class="instruction">Please complete the task as instructed.</p>
+
+        <section class="stats" aria-label="Game status">
+          <div class="stat-card">
+            <span class="label">Time</span>
+            <span id="timer" class="value">05:00</span>
+          </div>
+          <div class="stat-card">
+            <span class="label">Score</span>
+            <span id="score" class="value">0</span>
+          </div>
+        </section>
+
+        <section class="game-card">
+          <p id="status" class="status">Press start to begin.</p>
+          <div id="question" class="question" aria-live="polite">?</div>
+
+          <form id="answer-form" class="answer-form">
+            <label class="sr-only" for="answer">Answer</label>
+            <input
+              id="answer"
+              type="number"
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder="Type your answer"
+              disabled
+            />
+            <button type="submit" id="submit-btn" disabled>Submit</button>
+          </form>
+
+          <button id="start-btn" class="primary-btn">Start round</button>
+          <button id="continue-after-condition-one" class="secondary-btn" hidden>Continue to survey</button>
+        </section>
+      </section>
+
+      <section id="survey-one-section" class="card" hidden>
+        <h2>Survey 1</h2>
+        <p>Please tell us a little about your experience so far.</p>
+
+        <form id="survey-one-form" class="survey-form">
+          <label>
+            How enjoyable was this round overall?
+            <select name="enjoyment">
+              <option value="">Select one</option>
+              <option value="1">1 - Not enjoyable at all</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Extremely enjoyable</option>
+            </select>
+          </label>
+
+          <label>
+            How motivated did you feel to continue solving more problems?
+            <select name="motivation">
+              <option value="">Select one</option>
+              <option value="1">1 - Not motivated at all</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very motivated</option>
+            </select>
+          </label>
+
+          <label>
+            How likely would you be to try again to reach a higher score?
+            <select name="retry">
+              <option value="">Select one</option>
+              <option value="1">1 - Very unlikely</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very likely</option>
+            </select>
+          </label>
+
+          <label>
+            How satisfied were you with your performance in this round?
+            <select name="satisfaction">
+              <option value="">Select one</option>
+              <option value="1">1 - Very dissatisfied</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very satisfied</option>
+            </select>
+          </label>
+
+          <label>
+            How clear and understandable was the task?
+            <select name="clarity">
+              <option value="">Select one</option>
+              <option value="1">1 - Very unclear</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very clear</option>
+            </select>
+          </label>
+
+          <label>
+            How much mental effort did this round require?
+            <select name="effort">
+              <option value="">Select one</option>
+              <option value="1">1 - Very little effort</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very high effort</option>
+            </select>
+          </label>
+
+          <button type="submit" class="primary-btn">Continue</button>
         </form>
+      </section>
 
-        <button id="start-btn" class="start-button">Start</button>
+      <section id="condition-two-section" class="card" hidden>
+        <h2 id="condition-two-title">Round 2</h2>
+        <p class="instruction">Please complete the task as instructed.</p>
+
+        <section class="stats" aria-label="Game status">
+          <div class="stat-card">
+            <span class="label">Time</span>
+            <span id="timer-two" class="value">05:00</span>
+          </div>
+          <div class="stat-card">
+            <span class="label">Score</span>
+            <span id="score-two" class="value">0</span>
+          </div>
+        </section>
+
+        <section class="game-card">
+          <p id="status-two" class="status">Press start to begin.</p>
+          <div id="question-two" class="question" aria-live="polite">?</div>
+
+          <form id="answer-form-two" class="answer-form">
+            <label class="sr-only" for="answer-two">Answer</label>
+            <input
+              id="answer-two"
+              type="number"
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder="Type your answer"
+              disabled
+            />
+            <button type="submit" id="submit-btn-two" disabled>Submit</button>
+          </form>
+
+          <button id="start-btn-two" class="primary-btn">Start round</button>
+          <button id="continue-after-condition-two" class="secondary-btn" hidden>Continue to survey</button>
+        </section>
+      </section>
+
+      <section id="survey-two-section" class="card" hidden>
+        <h2>Survey 2</h2>
+        <p>Please tell us about the second experience.</p>
+
+        <form id="survey-two-form" class="survey-form">
+          <label>
+            How enjoyable was this round overall?
+            <select name="enjoyment">
+              <option value="">Select one</option>
+              <option value="1">1 - Not enjoyable at all</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Extremely enjoyable</option>
+            </select>
+          </label>
+
+          <label>
+            How motivated did you feel to continue solving more problems?
+            <select name="motivation">
+              <option value="">Select one</option>
+              <option value="1">1 - Not motivated at all</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very motivated</option>
+            </select>
+          </label>
+
+          <label>
+            How likely would you be to try again to reach a higher score?
+            <select name="retry">
+              <option value="">Select one</option>
+              <option value="1">1 - Very unlikely</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very likely</option>
+            </select>
+          </label>
+
+          <label>
+            How satisfied were you with your performance in this round?
+            <select name="satisfaction">
+              <option value="">Select one</option>
+              <option value="1">1 - Very dissatisfied</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very satisfied</option>
+            </select>
+          </label>
+
+          <label>
+            How clear and understandable was the task?
+            <select name="clarity">
+              <option value="">Select one</option>
+              <option value="1">1 - Very unclear</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very clear</option>
+            </select>
+          </label>
+
+          <label>
+            How much mental effort did this round require?
+            <select name="effort">
+              <option value="">Select one</option>
+              <option value="1">1 - Very little effort</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5 - Very high effort</option>
+            </select>
+          </label>
+
+          <button type="submit" class="primary-btn">Finish study</button>
+        </form>
+      </section>
+
+      <section id="complete-section" class="card" hidden>
+        <h2>Study complete</h2>
+        <p>Thank you for participating. You can now close this page.</p>
       </section>
     </main>
 
