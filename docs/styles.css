@@ -123,6 +123,18 @@ body {
   margin: 20px 0 28px;
 }
 
+.round-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.round-actions .secondary-btn {
+  margin-top: 0;
+  flex: 1 1 180px;
+}
+
 .answer-form {
   display: flex;
   gap: 12px;

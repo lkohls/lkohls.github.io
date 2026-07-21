@@ -40,7 +40,7 @@
         <section class="stats" aria-label="Game status">
           <div class="stat-card">
             <span class="label">Time</span>
-            <span id="timer" class="value">05:00</span>
+            <span id="timer" class="value">03:00</span>
           </div>
           <div class="stat-card">
             <span class="label">Score</span>
@@ -51,6 +51,11 @@
         <section class="game-card">
           <p id="status" class="status">Press start to begin.</p>
           <div id="question" class="question" aria-live="polite">?</div>
+
+          <div class="round-actions">
+            <button id="start-btn" class="secondary-btn">Start round</button>
+            <button id="continue-after-condition-one" class="secondary-btn" hidden>Continue to survey</button>
+          </div>
 
           <form id="answer-form" class="answer-form">
             <label class="sr-only" for="answer">Answer</label>
@@ -64,9 +69,6 @@
             />
             <button type="submit" id="submit-btn" disabled>Submit</button>
           </form>
-
-          <button id="start-btn" class="primary-btn">Start round</button>
-          <button id="continue-after-condition-one" class="secondary-btn" hidden>Continue to survey</button>
         </section>
       </section>
 
@@ -158,7 +160,7 @@
         <section class="stats" aria-label="Game status">
           <div class="stat-card">
             <span class="label">Time</span>
-            <span id="timer-two" class="value">05:00</span>
+            <span id="timer-two" class="value">03:00</span>
           </div>
           <div class="stat-card">
             <span class="label">Score</span>
@@ -169,6 +171,11 @@
         <section class="game-card">
           <p id="status-two" class="status">Press start to begin.</p>
           <div id="question-two" class="question" aria-live="polite">?</div>
+
+          <div class="round-actions">
+            <button id="start-btn-two" class="secondary-btn">Start round</button>
+            <button id="continue-after-condition-two" class="secondary-btn" hidden>Continue to survey</button>
+          </div>
 
           <form id="answer-form-two" class="answer-form">
             <label class="sr-only" for="answer-two">Answer</label>
@@ -182,9 +189,6 @@
             />
             <button type="submit" id="submit-btn-two" disabled>Submit</button>
           </form>
-
-          <button id="start-btn-two" class="primary-btn">Start round</button>
-          <button id="continue-after-condition-two" class="secondary-btn" hidden>Continue to survey</button>
         </section>
       </section>
 

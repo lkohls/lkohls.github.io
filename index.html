@@ -22,6 +22,12 @@
         <p>
           You will be randomly assigned to one version first, then you will complete the other version after a short survey.
         </p>
+        <p>
+          If you want to use a tool, you may use only pen and paper; calculators or similar devices are not allowed.
+        </p>
+        <p>
+          The task becomes slightly more difficult after three correct answers in a row, and it becomes slightly easier after an incorrect answer.
+        </p>
         <button id="start-study-btn" class="primary-btn">Start study</button>
       </section>
 
@@ -40,7 +46,7 @@
         <section class="stats" aria-label="Game status">
           <div class="stat-card">
             <span class="label">Time</span>
-            <span id="timer" class="value">05:00</span>
+            <span id="timer" class="value">03:00</span>
           </div>
           <div class="stat-card">
             <span class="label">Score</span>
@@ -51,6 +57,11 @@
         <section class="game-card">
           <p id="status" class="status">Press start to begin.</p>
           <div id="question" class="question" aria-live="polite">?</div>
+
+          <div class="round-actions">
+            <button id="start-btn" class="secondary-btn">Start round</button>
+            <button id="continue-after-condition-one" class="secondary-btn" hidden>Continue to survey</button>
+          </div>
 
           <form id="answer-form" class="answer-form">
             <label class="sr-only" for="answer">Answer</label>
@@ -64,9 +75,6 @@
             />
             <button type="submit" id="submit-btn" disabled>Submit</button>
           </form>
-
-          <button id="start-btn" class="primary-btn">Start round</button>
-          <button id="continue-after-condition-one" class="secondary-btn" hidden>Continue to survey</button>
         </section>
       </section>
 
@@ -158,7 +166,7 @@
         <section class="stats" aria-label="Game status">
           <div class="stat-card">
             <span class="label">Time</span>
-            <span id="timer-two" class="value">05:00</span>
+            <span id="timer-two" class="value">03:00</span>
           </div>
           <div class="stat-card">
             <span class="label">Score</span>
@@ -169,6 +177,11 @@
         <section class="game-card">
           <p id="status-two" class="status">Press start to begin.</p>
           <div id="question-two" class="question" aria-live="polite">?</div>
+
+          <div class="round-actions">
+            <button id="start-btn-two" class="secondary-btn">Start round</button>
+            <button id="continue-after-condition-two" class="secondary-btn" hidden>Continue to survey</button>
+          </div>
 
           <form id="answer-form-two" class="answer-form">
             <label class="sr-only" for="answer-two">Answer</label>
@@ -182,9 +195,6 @@
             />
             <button type="submit" id="submit-btn-two" disabled>Submit</button>
           </form>
-
-          <button id="start-btn-two" class="primary-btn">Start round</button>
-          <button id="continue-after-condition-two" class="secondary-btn" hidden>Continue to survey</button>
         </section>
       </section>
 
@@ -272,6 +282,7 @@
       <section id="complete-section" class="card" hidden>
         <h2>Study complete</h2>
         <p>Thank you for participating. You can now close this page.</p>
+        <p id="completion-status" class="status">Your results will be submitted when the study is complete.</p>
       </section>
     </main>
 

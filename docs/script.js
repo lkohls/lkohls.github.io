@@ -1,4 +1,4 @@
-const GAME_DURATION = 5 * 60;
+const GAME_DURATION = 3 * 60;
 const motivationalPhrases = ["Nice work!", "You’re doing great!", "Keep it up!"];
 
 const state = {
@@ -238,14 +238,15 @@ function handleAnswer(event) {
       ? `${motivationalPhrases[Math.floor(Math.random() * motivationalPhrases.length)]}`
       : "Correct.";
 
-    if (roundState.streak % 5 === 0 && roundState.level < 2) {
+    if (roundState.streak === 3 && roundState.level < 2) {
       roundState.level += 1;
+      roundState.streak = 0;
       const nextDifficulty = getDifficultyConfig(roundState.level);
       earnedPoints = nextDifficulty.scoreValue;
       if (currentMode === "motivational") {
-        message = `Good job, that was five correct questions in a row. You have unlocked higher difficulty tasks with greater rewards.`;
+        message = `Great job, that was three correct answers in a row. You have unlocked a harder difficulty level.`;
       } else {
-        message = `Five questions correct in a row. Upgraded difficulty and score.`;
+        message = `Three correct answers in a row. Difficulty increased.`;
       }
     }
 
@@ -254,7 +255,12 @@ function handleAnswer(event) {
     setStatus(message);
   } else {
     roundState.streak = 0;
-    setStatus(`Incorrect. The answer was ${currentProblem.answer}.`);
+    if (roundState.level > 0) {
+      roundState.level -= 1;
+      setStatus(`Incorrect. The answer was ${currentProblem.answer}. Difficulty dropped.`);
+    } else {
+      setStatus(`Incorrect. The answer was ${currentProblem.answer}.`);
+    }
   }
 
   if (state.phase === "condition1") {
