@@ -8,7 +8,7 @@
       name="description"
       content="A two-condition study experience for addition practice with basic and motivational versions."
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260721" />
   </head>
   <body>
     <main class="app">
@@ -21,6 +21,12 @@
         <h2>Welcome</h2>
         <p>
           You will be randomly assigned to one version first, then you will complete the other version after a short survey.
+        </p>
+        <p>
+          If you want to use a tool, you may use only pen and paper; calculators or similar devices are not allowed.
+        </p>
+        <p>
+          The task becomes slightly more difficult after three correct answers in a row, and it becomes slightly easier after an incorrect answer.
         </p>
         <button id="start-study-btn" class="primary-btn">Start study</button>
       </section>
@@ -276,9 +282,10 @@
       <section id="complete-section" class="card" hidden>
         <h2>Study complete</h2>
         <p>Thank you for participating. You can now close this page.</p>
+        <p id="completion-status" class="status">Your results will be submitted when the study is complete.</p>
       </section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20260721"></script>
   </body>
 </html>

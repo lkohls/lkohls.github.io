@@ -1,7 +1,7 @@
 const GAME_DURATION = 3 * 60;
 const motivationalPhrases = ["Nice work!", "You’re doing great!", "Keep it up!"];
 const resultsEndpointParam = new URLSearchParams(window.location.search).get("resultsEndpoint");
-const RESULTS_ENDPOINT = resultsEndpointParam || "";
+const RESULTS_ENDPOINT = resultsEndpointParam || "https://script.google.com/macros/s/AKfycbzc08Ud4I47SJiFMrdstapRXZqODP2WsED4NCKh4zxBlcOPMT6r7xzLf65OQviREY24uA/exec";
 
 const state = {
   phase: "landing",

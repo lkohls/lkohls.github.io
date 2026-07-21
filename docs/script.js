@@ -1,5 +1,7 @@
 const GAME_DURATION = 3 * 60;
 const motivationalPhrases = ["Nice work!", "You’re doing great!", "Keep it up!"];
+const resultsEndpointParam = new URLSearchParams(window.location.search).get("resultsEndpoint");
+const RESULTS_ENDPOINT = resultsEndpointParam || "https://script.google.com/macros/s/AKfycbzc08Ud4I47SJiFMrdstapRXZqODP2WsED4NCKh4zxBlcOPMT6r7xzLf65OQviREY24uA/exec";
 
 const state = {
   phase: "landing",
@@ -10,6 +12,8 @@ const state = {
   surveyTwo: {},
   scoreOne: 0,
   scoreTwo: 0,
+  sessionId: null,
+  startedAt: null,
 };
 
 const landingSection = document.getElementById("landing-section");
@@ -45,6 +49,7 @@ const answerTwoForm = document.getElementById("answer-form-two");
 const submitTwoButton = document.getElementById("submit-btn-two");
 const startTwoButton = document.getElementById("start-btn-two");
 const continueConditionTwoButton = document.getElementById("continue-after-condition-two");
+const completionStatusElement = document.getElementById("completion-status");
 
 let timeLeft = GAME_DURATION;
 let score = 0;
@@ -130,6 +135,20 @@ function setStatus(message) {
   } else if (state.phase === "condition2") {
     statusTwoElement.textContent = message;
   }
+}
+
+function setCompletionStatus(message) {
+  if (completionStatusElement) {
+    completionStatusElement.textContent = message;
+  }
+}
+
+function generateSessionId() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+
+  return `session-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
 function generateProblem() {
@@ -358,12 +377,60 @@ function startStudy() {
   state.phase = "condition1";
   state.scoreOne = 0;
   state.scoreTwo = 0;
+  state.surveyOne = {};
+  state.surveyTwo = {};
+  state.sessionId = generateSessionId();
+  state.startedAt = new Date().toISOString();
+  setCompletionStatus("Your results will be submitted when the study is complete.");
   updateView();
 }
 
 function goToConditionTwo() {
   state.phase = "condition2";
   updateView();
+}
+
+function buildResultsPayload() {
+  return {
+    sessionId: state.sessionId,
+    startedAt: state.startedAt,
+    completedAt: new Date().toISOString(),
+    firstCondition: state.firstCondition,
+    secondCondition: state.secondCondition,
+    scoreOne: state.scoreOne,
+    scoreTwo: state.scoreTwo,
+    surveyOne: state.surveyOne,
+    surveyTwo: state.surveyTwo,
+    roundDurationSeconds: GAME_DURATION,
+  };
+}
+
+async function submitResults() {
+  if (!RESULTS_ENDPOINT) {
+    setCompletionStatus("Results will be sent once a submission endpoint is configured.");
+    return;
+  }
+
+  setCompletionStatus("Submitting your results...");
+
+  try {
+    const response = await fetch(RESULTS_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(buildResultsPayload()),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+
+    setCompletionStatus("Your results were submitted successfully.");
+  } catch (error) {
+    console.error("Failed to submit study results.", error);
+    setCompletionStatus("The study finished, but the results could not be sent automatically.");
+  }
 }
 
 function submitSurveyOne(event) {
@@ -381,7 +448,7 @@ function submitSurveyOne(event) {
   updateView();
 }
 
-function submitSurveyTwo(event) {
+async function submitSurveyTwo(event) {
   event.preventDefault();
   const form = new FormData(event.target);
   state.surveyTwo = {
@@ -394,6 +461,7 @@ function submitSurveyTwo(event) {
   };
   state.phase = "complete";
   updateView();
+  await submitResults();
 }
 
 document.getElementById("start-study-btn").addEventListener("click", startStudy);
