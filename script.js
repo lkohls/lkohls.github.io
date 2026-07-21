@@ -414,22 +414,20 @@ async function submitResults() {
   setCompletionStatus("Submitting your results...");
 
   try {
-    const response = await fetch(RESULTS_ENDPOINT, {
+    await fetch(RESULTS_ENDPOINT, {
       method: "POST",
+      mode: "no-cors",
+      keepalive: true,
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(buildResultsPayload()),
     });
 
-    if (!response.ok) {
-      throw new Error(`Request failed with status ${response.status}`);
-    }
-
     setCompletionStatus("Your results were submitted successfully.");
   } catch (error) {
     console.error("Failed to submit study results.", error);
-    setCompletionStatus("The study finished, but the results could not be sent automatically.");
+    setCompletionStatus(`The study finished, but the results could not be sent automatically. ${error.message}`);
   }
 }
 
